@@ -1,0 +1,31 @@
+:root {
+  /* สีและฟอนต์หลักจาก https://supersathit.github.io/WeddingTanTar/ */
+  --color-bg: #F7F1E6;
+  --color-surface: #FBF7EF;
+  --color-primary: #E2B75C;
+  --color-primary-dark: #5E3F35;
+  --color-accent: #D6C3A5;
+  --color-heart: color-mix(in srgb, var(--color-accent), var(--color-danger) 45%);
+  --color-text: #3B2A23;
+  --color-muted: #806C60;
+  --color-border: #EDE3D2;
+  --color-gold-dark: #C79A45;
+  --color-wish-bg: var(--color-primary-dark);
+  --color-wish-text: var(--color-surface);
+  --color-wish-muted: color-mix(in srgb, var(--color-surface) 82%, var(--color-wish-bg));
+  --color-wish-border: color-mix(in srgb, var(--color-primary) 40%, var(--color-wish-bg));
+  --color-wish-detail-bg: var(--color-text);
+  --font-body: 'Playpen Sans Thai', sans-serif;
+  --font-heading: 'Playpen Sans Thai', sans-serif;
+  --font-script: 'Yesteryear', cursive;
+  --font-serif: 'Cormorant Garamond', serif;
+  --color-danger: #A04E49;
+  --color-success: #66805B;
+  --color-soft-pink: #F7EBE7;
+  --color-soft-gold: #F4EDE1;
+  --color-success-bg: #EFF3EB;
+  --color-danger-bg: #FBEEEB;
+  --shadow-soft: 0 16px 60px color-mix(in srgb, var(--color-text) 5%, transparent);
+  --shadow-card: 0 5px 24px color-mix(in srgb, var(--color-text) 5%, transparent);
+  --shadow-card-hover: 0 16px 36px color-mix(in srgb, var(--color-text) 20%, transparent), 0 0 0 1px var(--color-primary), 0 0 24px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}

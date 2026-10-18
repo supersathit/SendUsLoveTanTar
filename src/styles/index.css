@@ -1,0 +1,302 @@
+@import 'tailwindcss';
+@config '../../tailwind.config.js';
+
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin: 0; font-family: var(--font-body); font-weight: 300; color: var(--color-text); background: var(--color-bg); -webkit-font-smoothing: antialiased; }
+.write-page, .display-page, .login-page, .admin-page { position: relative; isolation: isolate; }
+.admin-page { min-height: 100dvh; }
+.floating-hearts { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; user-select: none; contain: layout paint; }
+.floating-heart { position: absolute; top: 100%; display: block; opacity: 0; color: var(--color-heart); animation: heart-float-up var(--heart-duration) var(--heart-delay) linear infinite; }
+.floating-heart:nth-child(3n) { color: var(--color-primary); }
+.floating-heart svg { display: block; width: 100%; height: 100%; fill: currentColor; stroke-width: .8; }
+@keyframes heart-float-up {
+  0% { opacity: 0; transform: translate3d(0, 70px, 0) rotate(-12deg) scale(.85); }
+  12%, 82% { opacity: var(--heart-opacity); }
+  50% { transform: translate3d(calc(var(--heart-drift) * -.35), -50dvh, 0) rotate(6deg) scale(1); }
+  100% { opacity: 0; transform: translate3d(var(--heart-drift), calc(-100dvh - 140px), 0) rotate(18deg) scale(1.05); }
+}
+button, input, textarea { font: inherit; }
+button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+button, a { touch-action: manipulation; }
+button { cursor: pointer; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+a { color: inherit; text-decoration: none; }
+button:focus-visible, a:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 4px; }
+h1, h2, h3, p { margin: 0; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.muted { color: var(--color-muted); }
+.eyebrow { font-size: 11px; font-weight: 400; letter-spacing: .08em; color: var(--color-muted); }
+.couple-title { font-family: var(--font-heading); font-size: 44px; font-weight: 400; color: var(--color-primary-dark); line-height: 1.35; }
+.wedding-logo { width: 86px; height: 75px; object-fit: contain; }
+.ornament-divider { display: flex; align-items: center; justify-content: center; gap: 14px; color: var(--color-primary); font-size: 18px; margin: 8px 0; }
+.ornament-divider span { height: 1px; width: 68px; background: linear-gradient(90deg, transparent, var(--color-primary)); opacity: .5; }
+.ornament-divider span:last-child { transform: rotate(180deg); }
+.wedding-date { font-size: 12px; color: var(--color-muted); }
+.floral-corner { position: absolute; pointer-events: none; color: var(--color-primary); opacity: .32; width: 230px; }
+.write-page { min-height: 100dvh; padding: 48px 24px 24px; overflow: hidden; background: radial-gradient(ellipse at 0% 8%, var(--color-soft-pink), transparent 38%), radial-gradient(ellipse at 100% 94%, var(--color-soft-gold), transparent 38%), var(--color-bg); }
+.write-shell { max-width: 560px; margin: 0 auto; position: relative; }
+.write-floral-left { top: 22px; left: -234px; }
+.write-floral-right { right: -224px; bottom: 40px; transform: rotate(180deg); }
+.write-header { text-align: center; padding: 0 0 26px; }
+.write-header .wedding-logo { display: block; margin: 22px auto 12px; }
+.form-panel { position: relative; padding: 27px 34px 28px; border: 1px solid var(--color-border); border-radius: 22px; background: var(--color-surface); box-shadow: var(--shadow-soft); }
+.form-intro { text-align: center; padding-bottom: 24px; border-bottom: 1px solid var(--color-border); margin-bottom: 25px; }
+.small-heart { display: block; color: var(--color-primary); font-size: 29px; height: 36px; }
+.form-intro h2 { font-family: var(--font-heading); font-size: 26px; font-weight: 400; margin: 6px 0; }
+.form-intro p { font-size: 11px; color: var(--color-muted); }
+.field-group { margin-bottom: 22px; }
+.field-group label, .field-group legend { display: block; font-weight: 400; font-size: 13px; margin-bottom: 9px; }
+.required { color: var(--color-primary); }
+.optional { color: var(--color-muted); font-size: 11px; font-weight: 300; padding-left: 4px; }
+input:not([type=file]), textarea { display: block; width: 100%; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); border-radius: 10px; padding: 13px 15px; outline: 0; font-size: 13px; transition: border-color .2s, box-shadow .2s; }
+input::placeholder, textarea::placeholder { color: var(--color-muted); opacity: .8; }
+input:focus, textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 12%, transparent); }
+textarea { resize: vertical; min-height: 135px; line-height: 1.9; }
+.label-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.counter { color: var(--color-muted); font-size: 10px; white-space: nowrap; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 5px; padding: 9px 13px; min-height: 38px; border-radius: 8px; border: 1px solid var(--color-border); color: var(--color-muted); background: var(--color-surface); font-size: 12px; font-weight: 300; transition: all .2s; }
+.chip:hover { border-color: var(--color-primary); color: var(--color-primary-dark); }
+.chip.selected { background: var(--color-soft-gold); border-color: var(--color-primary); color: var(--color-primary-dark); }
+.upload-zone { display: flex; align-items: center; flex-direction: column; gap: 6px; background: var(--color-bg); border: 1px dashed var(--color-border); border-radius: 12px; padding: 23px 12px; width: 100%; transition: border-color .2s; }
+.upload-zone:hover { border-color: var(--color-primary); }
+.upload-icon { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 50%; color: var(--color-primary); background: var(--color-soft-gold); margin-bottom: 4px; }
+.upload-zone strong { font-size: 12px; font-weight: 400; color: var(--color-text); }
+.upload-zone > span:last-child { font-size: 10px; color: var(--color-muted); }
+.photo-preview { position: relative; border-radius: 12px; overflow: hidden; background: var(--color-bg); }
+.photo-preview img { width: 100%; max-height: 260px; object-fit: contain; display: block; }
+.remove-photo { position: absolute; right: 8px; top: 8px; display: grid; place-items: center; padding: 8px; border: 1px solid var(--color-border); background: var(--color-surface); border-radius: 50%; color: var(--color-text); }
+.button-primary, .button-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 10px; padding: 13px 18px; border: 1px solid transparent; font-weight: 400; font-size: 13px; min-height: 44px; transition: opacity .2s, transform .2s; }
+.button-primary { color: var(--color-surface); background: linear-gradient(115deg, var(--color-primary-dark), var(--color-text)); }
+.button-primary:hover:not(:disabled) { opacity: .9; transform: translateY(-1px); }
+.button-secondary { color: var(--color-primary-dark); background: var(--color-surface); border-color: var(--color-border); }
+.button-secondary:hover:not(:disabled) { border-color: var(--color-primary); }
+.send-button { width: 100%; min-height: 51px; margin-top: 3px; box-shadow: 0 4px 14px color-mix(in srgb, var(--color-primary) 18%, transparent); }
+.send-button svg:last-child { margin-left: auto; }
+.send-button svg:first-child { margin-right: auto; }
+.form-note { text-align: center; color: var(--color-muted); font-size: 10px; margin-top: 13px; line-height: 1.8; }
+.honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.write-footer { text-align: center; color: var(--color-muted); font-size: 10px; padding: 27px 0 8px; }
+.write-footer > span { color: var(--color-primary); margin: 0 8px; }
+.write-footer p { font-size: 9px; margin-top: 9px; line-height: 1.8; }
+.error-message, .success-message { padding: 13px 16px; border-radius: 10px; font-size: 12px; line-height: 1.8; margin: 12px 0; }
+.error-message { background: var(--color-danger-bg); color: var(--color-danger); }
+.success-message { background: var(--color-success-bg); color: var(--color-success); }
+.thanks-panel { min-height: 410px; border: 1px solid var(--color-border); border-radius: 22px; background: var(--color-surface); box-shadow: var(--shadow-soft); text-align: center; padding: 75px 30px 45px; }
+.thanks-heart { color: var(--color-accent); position: relative; width: 64px; margin: 0 auto 28px; animation: heartbeat 1.8s infinite; }
+.thanks-heart > svg { fill: currentColor; }
+.thanks-heart > span { position: absolute; left: 24px; top: 20px; }
+.thanks-panel h2 { font-family: var(--font-heading); font-size: 36px; color: var(--color-primary-dark); }
+.thanks-panel p { font-size: 13px; color: var(--color-muted); margin: 14px 0 28px; line-height: 2; }
+@keyframes heartbeat { 50% { transform: scale(1.1); } }
+.display-page { position: relative; height: 100dvh; min-height: 450px; display: flex; flex-direction: column; overflow: hidden; background: radial-gradient(ellipse at 15% 0, var(--color-soft-pink), transparent 36%), var(--color-bg); }
+.display-floral-left { width: 270px; top: -30px; left: 0; opacity: .28; }
+.display-floral-right { width: 320px; right: -60px; bottom: -100px; transform: rotate(180deg); opacity: .28; }
+.display-header { display: flex; position: relative; align-items: center; justify-content: center; gap: 30px; text-align: center; padding: 25px 44px 26px; flex-shrink: 0; border-bottom: 1px solid var(--color-border); margin: 0 44px; }
+.display-header .couple-title { font-size: clamp(42px, 3.5vw, 70px); }
+.display-header .wedding-logo { width: 100px; height: 90px; position: absolute; left: 5px; }
+.display-header .eyebrow { font-size: 12px; }
+.display-header .ornament-divider { margin: 0; }
+.display-header .wedding-date { font-size: 14px; }
+.wish-count { display: flex; align-items: center; gap: 10px; position: absolute; right: 0; padding: 12px 18px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; font-size: 13px; color: var(--color-muted); }
+.wish-count b { font-weight: 500; font-size: 23px; color: var(--color-primary-dark); }
+.wall-scroll { flex: 1; overflow-y: auto; overflow-anchor: none; scroll-behavior: auto; min-height: 0; padding: 32px 44px 180px; scrollbar-width: none; }
+.wall-scroll::-webkit-scrollbar { display: none; }
+.wishes-wall { columns: 4; column-gap: 24px; }
+.wish-card { position: relative; break-inside: avoid; margin-bottom: 24px; border: 1px solid var(--color-wish-border); border-radius: 16px; padding: 23px; color: var(--color-wish-text); background: var(--color-wish-bg); box-shadow: var(--shadow-card); overflow-wrap: anywhere; }
+.wish-card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; box-shadow: var(--shadow-card-hover); transition: opacity .2s ease-in-out; }
+@media (hover: hover) and (pointer: fine) {
+  .wish-card:hover { z-index: 3; }
+  .wish-card:hover::after { opacity: 1; }
+}
+.wish-pinned { border-color: var(--color-primary); }
+.wish-card.wish-spotlight { z-index: 8; transform-origin: top left; }
+.wish-spotlight-layer { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
+.wish-spotlight .wish-photo { aspect-ratio: 16 / 10; }
+.wish-photo { width: 100%; height: auto; max-height: 270px; object-fit: cover; display: block; border-radius: 9px; margin-bottom: 16px; }
+.quote-mark { display: block; height: 30px; font-family: var(--font-serif); font-size: 58px; line-height: 1; color: var(--color-primary); }
+.quote-mark-close { text-align: right; margin-top: 8px; }
+.wish-message { font-size: clamp(19px, 1.25vw, 26px); line-height: 1.85; font-weight: 300; white-space: pre-wrap; text-align: center; }
+.wish-card-footer { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-wish-border); padding-top: 16px; margin-top: 22px; }
+.wish-author { display: flex; align-items: center; gap: 11px; min-width: 0; flex: 1; }
+.avatar { flex-shrink: 0; display: grid; place-items: center; font-family: var(--font-heading); width: 40px; height: 40px; background: var(--color-wish-detail-bg); border-radius: 50%; font-size: 22px; color: var(--color-primary); }
+.wish-author strong { display: block; font-size: 16px; font-weight: 400; color: var(--color-primary); }
+.wish-author time { display: block; font-size: 11px; margin-top: 2px; color: var(--color-wish-muted); }
+.side-badge { padding: 5px 10px; border-radius: 6px; background: var(--color-wish-detail-bg); color: var(--color-primary); font-size: 10px; white-space: nowrap; }
+.pin-badge { display: flex; align-items: center; gap: 5px; position: absolute; top: -11px; right: 16px; border: 1px solid var(--color-primary); border-radius: 6px; padding: 4px 8px; background: var(--color-wish-bg); color: var(--color-primary); font-size: 10px; }
+.wish-fresh { animation: golden-glow 4.2s ease-out both; z-index: 2; }
+@keyframes golden-glow { 0%, 30% { box-shadow: 0 0 0 2px var(--color-primary), 0 0 35px 6px color-mix(in srgb, var(--color-primary) 45%, transparent); } 100% { box-shadow: var(--shadow-card); } }
+.card-sparks { position: absolute; left: 50%; top: 40%; pointer-events: none; z-index: 4; }
+.card-sparks > span { position: absolute; color: var(--color-primary); font-size: 20px; }
+.card-sparks > span:nth-child(even) { color: var(--color-accent); }
+.qr-badge { position: absolute; right: 28px; bottom: 27px; z-index: 20; background: var(--color-surface); padding: 14px 17px 13px; border: 1px solid var(--color-border); border-radius: 14px; box-shadow: var(--shadow-soft); text-align: center; }
+.qr-badge svg { display: block; margin: 0 auto 7px; }
+.qr-badge strong { font-size: 13px; font-weight: 400; display: block; color: var(--color-primary-dark); }
+.qr-badge span { display: block; font-size: 9px; color: var(--color-muted); margin-top: 4px; }
+.display-bottom { padding: 15px 32px; display: flex; gap: 28px; align-items: center; flex-shrink: 0; border-top: 1px solid var(--color-border); background: var(--color-bg); min-height: 48px; }
+.display-bottom > p { color: var(--color-muted); font-size: 11px; }
+.connection-dot { display: inline-flex; align-items: center; gap: 7px; font-size: 10px; color: var(--color-muted); white-space: nowrap; }
+.connection-dot i { width: 6px; height: 6px; border-radius: 50%; background: var(--color-primary); }
+.connection-dot.connected i { background: var(--color-success); }
+.connection-dot.offline i, .connection-dot.unconfigured i { background: var(--color-danger); }
+.connection-dot.connecting i { animation: heartbeat 1s infinite; }
+.fullscreen-button { position: absolute; right: 20px; top: 15px; padding: 9px; color: var(--color-primary-dark); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; transition: opacity .3s; }
+.control-idle { opacity: 0; pointer-events: none; }
+.mouse-idle { cursor: none; }
+.wall-empty { min-height: 45vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--color-primary); }
+.wall-empty h2 { font-family: var(--font-heading); font-weight: 400; font-size: 36px; margin: 22px 0 12px; }
+.wall-empty p { font-size: 16px; color: var(--color-muted); }
+.login-page { min-height: 100dvh; display: grid; place-items: center; padding: 30px 20px; }
+.login-panel { width: 100%; max-width: 420px; padding: 32px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 20px; box-shadow: var(--shadow-soft); text-align: center; }
+.login-panel .wedding-logo { display: block; margin: 0 auto 22px; }
+.login-icon { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--color-soft-gold); color: var(--color-primary); margin: 0 auto 17px; }
+.login-panel h1 { font-family: var(--font-heading); font-size: 32px; font-weight: 400; }
+.login-panel > p { font-size: 12px; color: var(--color-muted); margin-top: 10px; }
+.login-panel form { text-align: left; margin-top: 27px; }
+.login-panel .button-primary { width: 100%; }
+.text-link { color: var(--color-primary-dark); font-size: 11px; border: 0; background: transparent; text-decoration: underline; text-underline-offset: 4px; padding: 6px 0; }
+.login-panel > .text-link { display: inline-block; margin-top: 23px; }
+.loading-message { font-size: 14px; color: var(--color-muted); }
+.admin-header { padding: 19px 4vw; background: var(--color-surface); border-bottom: 1px solid var(--color-border); display: flex; gap: 20px; justify-content: space-between; align-items: center; }
+.admin-brand { display: flex; gap: 16px; align-items: center; }
+.admin-brand .wedding-logo { width: 46px; height: 42px; }
+.admin-brand h1 { font-weight: 400; font-size: 16px; }
+.admin-brand p { color: var(--color-muted); font-size: 10px; margin-top: 4px; }
+.admin-account { display: flex; align-items: center; gap: 20px; }
+.admin-account > span { color: var(--color-muted); font-size: 11px; }
+.admin-account .button-secondary { padding: 9px 13px; min-height: 36px; font-size: 11px; }
+.admin-container { max-width: 1600px; padding: 38px 4vw 0; margin: 0 auto; }
+.admin-heading { display: flex; flex-wrap: wrap; gap: 25px; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.admin-heading h2 { font-family: var(--font-heading); font-weight: 400; font-size: 32px; margin: 6px 0 8px; }
+.admin-heading p:last-child { font-size: 11px; color: var(--color-muted); }
+.admin-tools { display: flex; flex-wrap: wrap; gap: 9px; }
+.admin-tools .button-secondary, .admin-tools .button-primary { font-size: 11px; padding: 11px 14px; }
+.stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 30px; }
+.wedding-settings-panel { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 15px; padding: 23px; margin-bottom: 25px; }
+.wedding-settings-intro h2 { font-family: var(--font-heading); font-size: 23px; font-weight: 400; }
+.wedding-settings-intro p { color: var(--color-muted); font-size: 11px; margin-top: 8px; line-height: 1.8; }
+.wedding-date-form { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; margin-top: 22px; }
+.wedding-date-field { flex: 1 1 220px; max-width: 360px; }
+.wedding-date-field label { display: block; font-size: 12px; font-weight: 400; margin-bottom: 9px; }
+.wedding-date-field p { color: var(--color-muted); font-size: 11px; margin-top: 9px; line-height: 1.8; }
+.settings-feedback { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.stat-card { background: var(--color-surface); padding: 20px; border: 1px solid var(--color-border); border-radius: 13px; }
+.stat-card > span { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 11px; color: var(--color-muted); }
+.stat-card svg { color: var(--color-primary); }
+.stat-card strong { font-weight: 400; font-size: 31px; color: var(--color-primary-dark); display: inline-block; margin-top: 15px; }
+.stat-card small { color: var(--color-muted); margin-left: 8px; font-size: 9px; }
+.admin-list-panel { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 15px; overflow: hidden; }
+.admin-toolbar { padding: 20px 23px 12px; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.search-field { display: flex; align-items: center; position: relative; width: 275px; }
+.search-field > svg { position: absolute; left: 12px; color: var(--color-muted); }
+.search-field input { padding: 11px 12px 11px 38px; font-size: 11px; }
+.filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.filter-chips .chip { font-size: 10px; padding: 7px 11px; min-height: 33px; }
+.list-caption { font-size: 10px; color: var(--color-muted); padding: 0 23px 18px; }
+.table-scroll { overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
+thead { background: var(--color-bg); }
+th { padding: 13px 23px; font-size: 10px; font-weight: 400; color: var(--color-muted); border-top: 1px solid var(--color-border); }
+td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-align: middle; }
+.table-name { display: block; font-weight: 400; font-size: 12px; max-width: 210px; overflow-wrap: anywhere; min-width: 120px; }
+.table-side, td time { display: block; color: var(--color-muted); font-size: 9px; margin-top: 5px; }
+.table-message { line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; min-width: 220px; max-width: 460px; }
+.table-image { display: inline-block; text-align: center; min-width: 52px; }
+.table-image img { width: 52px; height: 52px; border-radius: 7px; object-fit: cover; }
+.table-image span { display: block; font-size: 9px; color: var(--color-primary-dark); margin-top: 4px; }
+.state-badge { display: inline-block; white-space: nowrap; font-size: 9px; border-radius: 5px; padding: 5px 8px; }
+.state-badge.visible { color: var(--color-success); background: var(--color-success-bg); }
+.state-badge.hidden { color: var(--color-muted); background: var(--color-bg); }
+.table-pin { display: flex; align-items: center; gap: 3px; color: var(--color-primary); font-size: 9px; margin-top: 8px; }
+.row-actions { display: flex; gap: 6px; flex-wrap: wrap; min-width: 206px; }
+.row-actions button { display: flex; align-items: center; gap: 4px; font-size: 9px; padding: 7px 9px; border-radius: 5px; border: 1px solid var(--color-border); color: var(--color-primary-dark); background: var(--color-bg); }
+.row-actions .delete-action { background: var(--color-danger-bg); border-color: var(--color-danger-bg); color: var(--color-danger); }
+.hidden-row .table-message, .hidden-row .table-name { color: var(--color-muted); }
+.admin-empty { text-align: center; color: var(--color-muted); padding: 70px 20px; font-size: 13px; }
+.admin-footer { text-align: center; color: var(--color-muted); font-size: 10px; padding: 28px 0; }
+.admin-footer span { margin: 0 12px; color: var(--color-primary); }
+.qr-download-canvas { display: none; }
+.confirm-dialog { border: 1px solid var(--color-border); border-radius: 17px; background: var(--color-surface); color: var(--color-text); max-width: 420px; width: calc(100% - 40px); padding: 28px; box-shadow: var(--shadow-soft); }
+.confirm-dialog::backdrop { background: color-mix(in srgb, var(--color-text) 35%, transparent); backdrop-filter: blur(3px); }
+.confirm-dialog h2 { font-family: var(--font-heading); font-size: 29px; font-weight: 400; }
+.confirm-dialog p { font-size: 12px; color: var(--color-muted); line-height: 1.9; margin: 15px 0 25px; overflow-wrap: anywhere; }
+.dialog-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.fatal-error { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; padding: 24px; }
+.fatal-error h1 { font-family: var(--font-heading); font-size: 36px; }
+@media (max-width: 1500px) {
+  .wishes-wall { columns: 3; }
+  .display-header .couple-title { font-size: 50px; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 1050px) {
+  .display-header { padding-top: 24px; margin: 0 24px; }
+  .display-header .wedding-logo { width: 70px; height: 60px; }
+  .display-header .couple-title { font-size: 43px; }
+  .wish-count { font-size: 10px; padding: 9px; gap: 5px; }
+  .wish-count b { font-size: 18px; }
+  .wall-scroll { padding: 28px 24px 190px; }
+  .wishes-wall { columns: 2; }
+  .admin-account { gap: 10px; }
+  .admin-account > span { display: none; }
+}
+@media (max-width: 600px) {
+  .floating-heart:nth-child(n + 9) { display: none; }
+  .write-page { padding: 27px 18px 14px; }
+  .write-header { padding-bottom: 22px; }
+  .write-header .eyebrow { font-size: 9px; }
+  .write-header .wedding-logo { width: 73px; height: 63px; margin: 18px auto 9px; }
+  .couple-title { font-size: 36px; }
+  .write-header .wedding-date { font-size: 10px; }
+  .write-floral-left { width: 130px; left: -60px; top: 0; opacity: .2; }
+  .write-floral-right { width: 135px; right: -58px; bottom: 0; opacity: .2; }
+  .form-panel { padding: 20px; border-radius: 17px; }
+  .form-intro { padding-bottom: 20px; margin-bottom: 22px; }
+  .form-intro h2 { font-size: 24px; }
+  .form-intro p { font-size: 10px; }
+  input:not([type=file]), textarea { font-size: 16px; padding: 12px; }
+  input::placeholder, textarea::placeholder { font-size: 12px; }
+  .field-group { margin-bottom: 20px; }
+  .chip { padding: 8px 10px; font-size: 11px; }
+  .chips { gap: 6px; }
+  .optional { font-size: 10px; }
+  .form-note { font-size: 9px; }
+  .write-footer p { font-size: 8px; }
+  .display-header { display: block; margin: 0 15px; padding: 22px 0 15px; }
+  .display-header .wedding-logo { display: none; }
+  .display-header .eyebrow { font-size: 9px; }
+  .display-header .couple-title { font-size: 36px; }
+  .display-header .wedding-date { font-size: 11px; }
+  .wish-count { position: static; display: inline-flex; margin-top: 11px; padding: 5px 10px; }
+  .wall-scroll { padding: 24px 20px 200px; }
+  .wishes-wall { columns: 1; }
+  .wish-message { font-size: 19px; }
+  .display-bottom { padding: 10px 16px; }
+  .display-bottom > p { display: none; }
+  .qr-badge { right: 15px; bottom: 50px; padding: 10px; }
+  .qr-badge svg { width: 90px; height: 90px; }
+  .qr-badge strong { font-size: 10px; }
+  .wall-empty h2 { font-size: 28px; }
+  .wall-empty p { font-size: 12px; }
+  .admin-header { padding: 16px 20px; }
+  .admin-brand { gap: 10px; }
+  .admin-brand h1 { font-size: 13px; }
+  .admin-brand .wedding-logo { width: 35px; }
+  .admin-account .connection-dot { display: none; }
+  .admin-container { padding: 25px 16px 0; }
+  .admin-heading h2 { font-size: 27px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat-card { padding: 15px; }
+  .stat-card strong { font-size: 28px; }
+  .stat-card > span { font-size: 10px; }
+  .admin-toolbar { padding: 17px; gap: 15px; }
+  .search-field { width: 100%; }
+  .search-field input { font-size: 16px; }
+  .admin-tools { gap: 7px; }
+  .admin-tools .button-primary, .admin-tools .button-secondary { padding: 10px 12px; font-size: 10px; }
+  .admin-footer { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-heart { animation: none !important; top: var(--heart-rest-top); opacity: .08; transform: rotate(-10deg); }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

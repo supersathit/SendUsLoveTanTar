@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup – คำอวยพรงานแต่ง ณิชมนต์ & สถิตย์</title>
+<link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Prompt:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F2; --surface:#FFFFFF; --primary:#B8925A; --primary-dark:#8C6A3C;
+  --accent:#E8C4C4; --text:#4A3F35; --muted:#9A8C7E;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Prompt',sans-serif;background:#ece5dc;color:var(--text)}
+.tabs{position:sticky;top:0;z-index:50;display:flex;gap:8px;justify-content:center;padding:12px;background:#2f2822}
+.tabs button{font-family:inherit;border:0;padding:8px 18px;border-radius:999px;background:#4a3f35;color:#f3e9dc;cursor:pointer}
+.tabs button.active{background:var(--primary);color:#fff}
+.view{display:none;padding:24px}
+.view.active{display:block}
+.script{font-family:'Great Vibes',cursive}
+.divider{display:flex;align-items:center;gap:10px;color:var(--primary);justify-content:center;font-size:14px}
+.divider::before,.divider::after{content:"";height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--primary),transparent)}
+.note{text-align:center;color:#6b5f54;font-size:13px;margin-top:14px}
+
+/* ---------- หน้าแขก (มือถือ) ---------- */
+.phone{width:380px;margin:0 auto;border-radius:38px;border:10px solid #2f2822;background:var(--bg);min-height:780px;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.phone-inner{padding:34px 22px 28px;position:relative;z-index:1}
+.corner{position:absolute;width:130px;height:130px;opacity:.55;pointer-events:none}
+.corner.tl{top:0;left:0}
+.corner.br{bottom:0;right:0;transform:rotate(180deg)}
+.hero{text-align:center;margin-bottom:18px}
+.hero .script{font-size:24px;color:var(--primary)}
+.hero h1{font-family:'Charm',cursive;font-size:36px;color:var(--primary-dark);line-height:1.15}
+.hero p{color:var(--muted);font-size:13px;margin-top:6px}
+label{display:block;font-size:14px;margin:14px 0 6px;font-weight:500}
+input[type=text],textarea{width:100%;font-family:inherit;font-size:15px;padding:12px 14px;border:1px solid #e6dccf;border-radius:14px;background:#fff;color:var(--text);outline:none}
+input:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(184,146,90,.15)}
+textarea{height:110px;resize:none}
+.counter{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:7px 14px;border-radius:999px;border:1px solid var(--accent);font-size:13px;cursor:pointer;background:#fff;user-select:none}
+.chip.on{background:var(--accent);color:var(--primary-dark)}
+.upload{border:1.5px dashed var(--primary);border-radius:14px;padding:18px;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;background:rgba(255,255,255,.6)}
+.upload b{display:block;font-size:22px;color:var(--primary);font-weight:400}
+.btn{display:block;width:100%;margin-top:22px;padding:14px;border:0;border-radius:14px;font-family:inherit;font-size:16px;color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-dark));cursor:pointer;box-shadow:0 6px 16px rgba(140,106,60,.3)}
+.thanks{display:none;text-align:center;padding:150px 22px 0;position:relative;z-index:1}
+.thanks .heart{font-size:70px;color:#d9a3a3;animation:beat 1.2s infinite}
+.thanks h2{font-family:'Charm';font-size:32px;color:var(--primary-dark);margin-top:10px}
+.thanks p{color:var(--muted);margin-top:6px}
+@keyframes beat{50%{transform:scale(1.15)}}
+
+/* ---------- จอในงาน ---------- */
+.screen{width:100%;max-width:1400px;aspect-ratio:16/9;margin:0 auto;background:var(--bg);border-radius:12px;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.25);display:flex;flex-direction:column}
+.screen header{text-align:center;padding:18px 0 6px}
+.screen header .script{font-size:28px;color:var(--primary)}
+.screen header h1{font-family:'Charm';font-size:48px;color:var(--primary-dark);line-height:1.1}
+.count{display:inline-block;margin-top:8px;background:#fff;border:1px solid var(--accent);padding:4px 16px;border-radius:999px;font-size:14px;color:var(--primary-dark)}
+.wall{flex:1;overflow:hidden;padding:14px 28px 28px;columns:4;column-gap:18px}
+.card{break-inside:avoid;background:var(--surface);border-radius:18px;padding:16px;margin-bottom:18px;box-shadow:0 4px 16px rgba(74,63,53,.08);border:1px solid #f0e6da;position:relative}
+.card .img{height:150px;border-radius:12px;margin-bottom:12px;background:linear-gradient(135deg,var(--accent),#f6e7d6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px}
+.card .msg{font-size:17px;line-height:1.6}
+.card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:12px;color:var(--muted);gap:8px}
+.card .name{font-weight:500;color:var(--primary-dark);font-size:15px}
+.badge{font-size:11px;padding:2px 10px;border-radius:999px;background:#f3e8da;color:var(--primary-dark);white-space:nowrap}
+.badge.bride{background:#f8e3e3}
+.pin{position:absolute;top:-10px;right:14px;font-size:18px}
+.card.new{animation:enter 1s cubic-bezier(.2,1.4,.4,1) both, glow 4.5s ease-out}
+@keyframes enter{from{opacity:0;transform:scale(.6);filter:blur(8px)}to{opacity:1;transform:scale(1);filter:blur(0)}}
+@keyframes glow{0%,35%{box-shadow:0 0 0 3px var(--primary),0 0 34px 8px rgba(184,146,90,.55)}100%{box-shadow:0 4px 16px rgba(74,63,53,.08)}}
+.spark{position:absolute;left:50%;top:50%;font-size:16px;pointer-events:none;animation:fly 1.5s ease-out forwards;z-index:5}
+@keyframes fly{from{opacity:1;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4)}}
+.qr{position:absolute;right:22px;bottom:22px;background:#fff;padding:12px;border-radius:16px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.12);border:1px solid var(--accent);z-index:10}
+.qr-grid{display:grid;grid-template-columns:repeat(21,5px)}
+.qr-grid i{width:5px;height:5px}
+.qr p{font-size:13px;margin-top:6px;color:var(--primary-dark)}
+.status{position:absolute;left:16px;bottom:12px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:#5cb85c}
+.sim{display:block;margin:16px auto 0;padding:10px 22px;border:0;border-radius:999px;background:var(--primary);color:#fff;font-family:inherit;cursor:pointer}
+
+/* ---------- แอดมิน ---------- */
+.admin{max-width:1200px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.15);overflow:hidden}
+.admin-top{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;background:var(--bg);border-bottom:1px solid #eee3d6}
+.admin-top h2{font-family:'Charm';font-size:28px;color:var(--primary-dark)}
+.btn-sm{font-family:inherit;font-size:13px;padding:7px 14px;border-radius:10px;border:1px solid var(--primary);background:#fff;color:var(--primary-dark);cursor:pointer;margin-left:6px}
+.btn-sm.solid{background:var(--primary);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:20px 24px}
+.stat{background:var(--bg);border-radius:14px;padding:14px 16px;border:1px solid #f0e6da}
+.stat b{display:block;font-size:28px;color:var(--primary-dark)}
+.stat span{font-size:13px;color:var(--muted)}
+.toolbar{display:flex;gap:8px;padding:0 24px 14px;align-items:center;flex-wrap:wrap}
+.toolbar input{max-width:260px;padding:8px 12px;font-size:14px}
+.filter{padding:6px 12px;border-radius:999px;font-size:13px;border:1px solid #e6dccf;cursor:pointer}
+.filter.on{background:var(--accent);border-color:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;padding:10px 16px;background:#faf5ef;color:var(--muted);font-weight:500}
+td{padding:12px 16px;border-top:1px solid #f3ece3;vertical-align:middle}
+.thumb{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#f6e7d6)}
+tr.hidden-row td{opacity:.4}
+.state{font-size:12px;padding:2px 10px;border-radius:999px;background:#e7f4e7;color:#3c7a3c}
+.state.off{background:#eee;color:#888}
+.act{display:flex;gap:6px}
+.act button{border:0;background:#f6efe6;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:12px;font-family:inherit}
+.act button.del{background:#fbe5e5;color:#b44}
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <button class="active" data-v="write">หน้าแขก (มือถือ)</button>
+  <button data-v="display">จอในงาน</button>
+  <button data-v="admin">แอดมิน</button>
+</div>
+
+<!-- ========== หน้าแขก ========== -->
+<section class="view active" id="write">
+  <div class="phone">
+    <svg class="corner tl" viewBox="0 0 100 100" fill="none" stroke="#B8925A" stroke-width="1">
+      <path d="M0 40 Q30 35 40 0"/><path d="M0 60 Q45 50 60 0"/>
+      <circle cx="22" cy="22" r="6" fill="#E8C4C4" stroke="none"/><circle cx="38" cy="12" r="3" fill="#E8C4C4" stroke="none"/>
+    </svg>
+    <svg class="corner br" viewBox="0 0 100 100" fill="none" stroke="#B8925A" stroke-width="1">
+      <path d="M0 40 Q30 35 40 0"/><path d="M0 60 Q45 50 60 0"/>
+      <circle cx="22" cy="22" r="6" fill="#E8C4C4" stroke="none"/><circle cx="12" cy="38" r="3" fill="#E8C4C4" stroke="none"/>
+    </svg>
+
+    <div class="phone-inner" id="formBox">
+      <div class="hero">
+        <div class="script">Wedding Wishes</div>
+        <h1>ณิชมนต์ & สถิตย์</h1>
+        <div class="divider">♥</div>
+        <p>ร่วมส่งคำอวยพรให้บ่าวสาวกันนะคะ</p>
+      </div>
+
+      <label>ชื่อของคุณ *</label>
+      <input type="text" placeholder="เช่น พี่ต้น ทีมเพื่อนเจ้าบ่าว">
+
+      <label>คุณเป็นแขกฝ่ายไหน</label>
+      <div class="chips">
+        <span class="chip">ฝ่ายเจ้าสาว</span>
+        <span class="chip">ฝ่ายเจ้าบ่าว</span>
+        <span class="chip">ทั้งสองฝ่าย</span>
+      </div>
+
+      <label>คำอวยพร *</label>
+      <textarea id="msg" maxlength="500" placeholder="เขียนคำอวยพรถึงบ่าวสาว..."></textarea>
+      <div class="counter"><span id="cnt">0</span>/500</div>
+
+      <label>แนบรูป (ไม่บังคับ)</label>
+      <div class="upload"><b>+</b>แตะเพื่อเลือกรูป</div>
+
+      <button class="btn" id="sendBtn">ส่งคำอวยพร ♥</button>
+    </div>
+
+    <div class="thanks" id="thanks">
+      <div class="heart">♥</div>
+      <h2>ขอบคุณสำหรับคำอวยพร</h2>
+      <p>ข้อความของคุณกำลังขึ้นจอในงานแล้ว</p>
+      <button class="btn" id="againBtn">เขียนคำอวยพรอีกครั้ง</button>
+    </div>
+  </div>
+  <p class="note">กดปุ่ม "ส่งคำอวยพร" เพื่อดูหน้าขอบคุณ</p>
+</section>
+
+<!-- ========== จอในงาน ========== -->
+<section class="view" id="display">
+  <div class="screen">
+    <header>
+      <div class="script">Wedding Wishes</div>
+      <h1>ณิชมนต์ & สถิตย์</h1>
+      <div class="divider">[วันที่จัดงาน]</div>
+      <div class="count">คำอวยพรทั้งหมด <b id="total">0</b> ข้อความ</div>
+    </header>
+    <div class="wall" id="wall"></div>
+    <div class="qr"><div class="qr-grid" id="qr"></div><p>สแกนเพื่อร่วมอวยพร</p></div>
+    <div class="status">เชื่อมต่อแล้ว</div>
+  </div>
+  <button class="sim" id="simBtn">✦ จำลองคำอวยพรใหม่เข้ามา</button>
+  <p class="note">ระบบจะจำลองคำอวยพรใหม่ทุก 7 วินาทีให้ดูเอฟเฟกต์</p>
+</section>
+
+<!-- ========== แอดมิน ========== -->
+<section class="view" id="admin">
+  <div class="admin">
+    <div class="admin-top">
+      <h2>จัดการคำอวยพร</h2>
+      <div>
+        <button class="btn-sm">ดาวน์โหลด QR</button>
+        <button class="btn-sm">Export CSV</button>
+        <button class="btn-sm solid">เปิดหน้าจอแสดงผล ↗</button>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="sAll">0</b><span>คำอวยพรทั้งหมด</span></div>
+      <div class="stat"><b id="sBride">0</b><span>ฝ่ายเจ้าสาว</span></div>
+      <div class="stat"><b id="sGroom">0</b><span>ฝ่ายเจ้าบ่าว</span></div>
+      <div class="stat"><b id="sImg">0</b><span>มีรูปแนบ</span></div>
+    </div>
+    <div class="toolbar">
+      <input type="text" placeholder="ค้นหาชื่อหรือข้อความ...">
+      <span class="filter on">ทั้งหมด</span><span class="filter">แสดงอยู่</span>
+      <span class="filter">ซ่อนอยู่</span><span class="filter">ปักหมุด</span><span class="filter">มีรูป</span>
+    </div>
+    <table>
+      <thead><tr><th>รูป</th><th>ชื่อ</th><th>ฝ่าย</th><th>ข้อความ</th><th>เวลา</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+const sideLabel={bride:'ฝ่ายเจ้าสาว',groom:'ฝ่ายเจ้าบ่าว',both:'ทั้งสองฝ่าย'};
+let wishes=[
+  {n:'คุณแม่ณิชมนต์',s:'bride',m:'ขอให้ลูกทั้งสองรักกันมั่นคง ดูแลกันและกันไปตลอดชีวิตนะลูก',img:true,t:'1 นาทีที่แล้ว',pin:true},
+  {n:'แก๊งเพื่อน ม.ปลาย',s:'groom',m:'ยินดีด้วยนะสถิตย์! ในที่สุดก็มีคนมาดูแลแล้ว 555 ขอให้มีความสุขมากๆ',t:'3 นาทีที่แล้ว'},
+  {n:'พี่ฝน',s:'bride',m:'ขอให้มีความสุขมากๆ นะน้อง เป็นคู่ที่น่ารักที่สุดเลย',img:true,t:'5 นาทีที่แล้ว'},
+  {n:'ลุงชัย',s:'both',m:'ขอให้ครองรักกันยืนยาว มีลูกหลานไว้สืบสกุล',t:'6 นาทีที่แล้ว'},
+  {n:'ทีมงานบริษัท',s:'groom',m:'Happy Wedding ครับพี่! ขอให้รักกันแบบนี้ไปนานๆ',t:'8 นาทีที่แล้ว'},
+  {n:'มิ้นท์',s:'bride',m:'ร้องไห้ตอนเห็นเพื่อนเดินเข้างานเลย สวยมากๆ ขอให้มีความสุขที่สุดในโลก',img:true,t:'10 นาทีที่แล้ว'},
+  {n:'น้าเพ็ญ',s:'both',m:'ยินดีด้วยจ้ะ ขอให้ร่ำรวย สุขภาพแข็งแรงทั้งคู่',t:'12 นาทีที่แล้ว'},
+  {n:'โอ๊ต',s:'groom',m:'เพื่อนรัก ยินดีด้วยจริงๆ',t:'15 นาทีที่แล้ว'},
+];
+const pool=[
+  {n:'ป้าแดง',s:'bride',m:'ขอให้รักกันมั่นคงเหมือนวันนี้ทุกวันนะจ๊ะ',img:true},
+  {n:'เจมส์',s:'groom',m:'Congrats bro! ขอให้มีความสุขมากๆ',},
+  {n:'ครูสมศรี',s:'both',m:'ครูดีใจด้วยนะ ขอให้ชีวิตคู่ราบรื่น อบอุ่นตลอดไป'},
+  {n:'แพรว',s:'bride',m:'เจ้าสาวสวยที่สุด ขอให้มีความสุขในทุกๆ วันนะ',img:true},
+];
+let poolI=0;
+
+/* tabs */
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');document.getElementById(b.dataset.v).classList.add('active');
+});
+
+/* write page */
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');
+});
+const msg=document.getElementById('msg');
+msg.oninput=()=>document.getElementById('cnt').textContent=msg.value.length;
+document.getElementById('sendBtn').onclick=()=>{formBox.style.display='none';thanks.style.display='block'};
+document.getElementById('againBtn').onclick=()=>{formBox.style.display='block';thanks.style.display='none'};
+
+/* display */
+const wall=document.getElementById('wall');
+function cardHTML(w){
+  return `${w.pin?'<span class="pin">📌</span>':''}
+  ${w.img?'<div class="img">รูปจากแขก</div>':''}
+  <div class="msg">${w.m}</div>
+  <div class="foot"><div><div class="name">${w.n}</div>${w.t}</div>
+  <span class="badge ${w.s}">${sideLabel[w.s]}</span></div>`;
+}
+function renderWall(){
+  wall.innerHTML='';
+  [...wishes].filter(w=>!w.hidden).sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)).forEach(w=>{
+    const d=document.createElement('div');d.className='card';d.innerHTML=cardHTML(w);wall.appendChild(d);
+  });
+  document.getElementById('total').textContent=wishes.filter(w=>!w.hidden).length;
+}
+function addWish(){
+  const w={...pool[poolI++%pool.length],t:'เมื่อสักครู่'};
+  wishes.forEach(x=>{if(x.t==='เมื่อสักครู่')x.t='1 นาทีที่แล้ว'});
+  wishes.unshift(w);
+  renderWall();renderAdmin();
+  const firstNormal=[...wall.children].find((c,i)=>!c.querySelector('.pin'));
+  firstNormal.classList.add('new');
+  for(let i=0;i<14;i++){
+    const s=document.createElement('span');s.className='spark';
+    s.textContent=i%2?'♥':'✦';s.style.color=i%2?'#d9a3a3':'#B8925A';
+    const a=Math.random()*Math.PI*2,r=80+Math.random()*80;
+    s.style.setProperty('--dx',Math.cos(a)*r+'px');s.style.setProperty('--dy',Math.sin(a)*r+'px');
+    firstNormal.appendChild(s);setTimeout(()=>s.remove(),1600);
+  }
+}
+document.getElementById('simBtn').onclick=addWish;
+setInterval(()=>{if(document.getElementById('display').classList.contains('active'))addWish()},7000);
+
+/* fake QR */
+const qr=document.getElementById('qr');
+for(let y=0;y<21;y++)for(let x=0;x<21;x++){
+  const i=document.createElement('i');
+  const finder=(a,b)=>{const dx=x-a,dy=y-b;if(dx<0||dy<0||dx>6||dy>6)return null;return dx===0||dy===0||dx===6||dy===6||(dx>1&&dx<5&&dy>1&&dy<5)};
+  let f=finder(0,0)??finder(14,0)??finder(0,14);
+  const on=f!==null?f:Math.random()>.5;
+  i.style.background=on?'#4A3F35':'transparent';qr.appendChild(i);
+}
+
+/* admin */
+function renderAdmin(){
+  rows.innerHTML=wishes.map((w,i)=>`
+   <tr class="${w.hidden?'hidden-row':''}">
+    <td>${w.img?'<div class="thumb"></div>':'-'}</td>
+    <td><b>${w.n}</b></td>
+    <td><span class="badge ${w.s}">${sideLabel[w.s]}</span></td>
+    <td style="max-width:320px">${w.m}</td>
+    <td style="color:#9A8C7E;font-size:12px">${w.t}</td>
+    <td><span class="state ${w.hidden?'off':''}">${w.hidden?'ซ่อนอยู่':'แสดงอยู่'}</span>${w.pin?' 📌':''}</td>
+    <td style="opacity:1"><div class="act">
+      <button onclick="toggle(${i},'hidden')">${w.hidden?'แสดง':'ซ่อน'}</button>
+      <button onclick="toggle(${i},'pin')">${w.pin?'เลิกปักหมุด':'ปักหมุด'}</button>
+      <button class="del" onclick="del(${i})">ลบ</button>
+    </div></td>
+   </tr>`).join('');
+  sAll.textContent=wishes.length;
+  sBride.textContent=wishes.filter(w=>w.s==='bride').length;
+  sGroom.textContent=wishes.filter(w=>w.s==='groom').length;
+  sImg.textContent=wishes.filter(w=>w.img).length;
+}
+function toggle(i,k){wishes[i][k]=!wishes[i][k];renderAdmin();renderWall()}
+function del(i){if(confirm('ยืนยันการลบคำอวยพรนี้?')){wishes.splice(i,1);renderAdmin();renderWall()}}
+
+renderWall();renderAdmin();
+</script>
+</body>
+</html>
