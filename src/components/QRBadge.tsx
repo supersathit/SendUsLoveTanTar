@@ -12,5 +12,5 @@ export function useQRColors() {
 }
 export function QRBadge() {
   const { fg, bg } = useQRColors();
-  return <aside className="qr-badge">{fg && <QRCodeSVG value={writeUrl()} size={138} level="M" marginSize={2} fgColor={fg} bgColor={bg} />}<strong>สแกนเพื่อร่วมอวยพร</strong><span>ส่งความรักถึงบ่าวสาว</span></aside>;
+  return <aside className="qr-badge"><div className="qr-badge-copy"><strong>สแกนเพื่อร่วมอวยพร</strong><span>ส่งความรักถึงบ่าวสาว</span></div>{fg && <QRCodeSVG value={writeUrl()} size={138} level="M" marginSize={2} fgColor={fg} bgColor={bg} />}</aside>;
 }
