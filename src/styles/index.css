@@ -95,13 +95,12 @@ textarea { resize: vertical; min-height: 135px; line-height: 1.9; }
 .display-floral-right { width: 320px; right: -60px; bottom: -100px; transform: rotate(180deg); opacity: .28; }
 .display-header { display: grid; grid-template-columns: 100px minmax(0, 1fr) auto; position: relative; align-items: center; gap: 30px; text-align: center; padding: 20px 0; flex-shrink: 0; border-bottom: 1px solid var(--color-border); margin: 0 44px; }
 .display-heading { min-width: 0; }
-.display-summary { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
 .display-header .couple-title { font-size: clamp(42px, 3.5vw, 70px); }
 .display-header .wedding-logo { width: 100px; height: 90px; }
 .display-header .eyebrow { font-size: 12px; }
 .display-header .ornament-divider { margin: 0; }
 .display-header .wedding-date { font-size: 14px; }
-.wish-count { display: flex; align-items: center; gap: 10px; white-space: nowrap; padding: 12px 18px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; font-size: 13px; color: var(--color-muted); }
+.wish-count { display: flex; flex-shrink: 0; align-items: center; gap: 10px; margin-left: auto; white-space: nowrap; padding: 6px 12px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; font-size: 13px; color: var(--color-muted); }
 .wish-count b { font-weight: 500; font-size: 23px; color: var(--color-primary-dark); }
 .wall-scroll { flex: 1; overflow-y: auto; overflow-anchor: none; scroll-behavior: auto; min-height: 0; padding: 32px 44px; scrollbar-width: none; }
 .wall-scroll::-webkit-scrollbar { display: none; }
@@ -136,7 +135,7 @@ textarea { resize: vertical; min-height: 135px; line-height: 1.9; }
 .qr-badge strong { font-size: 13px; font-weight: 400; display: block; color: var(--color-primary-dark); }
 .qr-badge span { display: block; font-size: 9px; color: var(--color-muted); margin-top: 4px; }
 .display-bottom { padding: 15px 32px; display: flex; gap: 28px; align-items: center; flex-shrink: 0; border-top: 1px solid var(--color-border); background: var(--color-bg); min-height: 48px; }
-.display-bottom > p { color: var(--color-muted); font-size: 11px; }
+.display-bottom > p { flex: 1; min-width: 0; color: var(--color-muted); font-size: 11px; overflow-wrap: anywhere; }
 .connection-dot { display: inline-flex; align-items: center; gap: 7px; font-size: 10px; color: var(--color-muted); white-space: nowrap; }
 .connection-dot i { width: 6px; height: 6px; border-radius: 50%; background: var(--color-primary); }
 .connection-dot.connected i { background: var(--color-success); }
@@ -232,7 +231,6 @@ td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-ali
 }
 @media (max-width: 1050px) {
   .display-header { grid-template-columns: 70px minmax(0, 1fr) auto; gap: 16px; margin: 0 24px; }
-  .display-summary { flex-direction: column; gap: 10px; }
   .display-header .wedding-logo { width: 70px; height: 60px; }
   .display-header .couple-title { font-size: 43px; }
   .wish-count { font-size: 10px; padding: 9px; gap: 5px; }
@@ -273,7 +271,7 @@ td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-ali
   .wall-scroll { padding: 24px 20px; }
   .wishes-wall { columns: 1; }
   .wish-message { font-size: 19px; }
-  .display-bottom { padding: 10px 16px; }
+  .display-bottom { padding: 10px 16px; gap: 12px; }
   .display-bottom > p { display: none; }
   .qr-badge { padding: 10px; }
   .qr-badge svg { width: 90px; height: 90px; }
