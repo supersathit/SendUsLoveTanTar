@@ -113,8 +113,7 @@ textarea { resize: vertical; min-height: 135px; line-height: 1.9; }
 .wish-pinned { border-color: var(--color-primary); }
 .wish-card.wish-spotlight { z-index: 8; transform-origin: top left; }
 .wish-spotlight-layer { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
-.wish-spotlight .wish-photo { aspect-ratio: 16 / 10; }
-.wish-photo { width: 100%; height: auto; max-height: 270px; object-fit: cover; display: block; border-radius: 9px; margin-bottom: 16px; }
+.wish-photo { width: auto; max-width: 100%; height: auto; object-fit: contain; display: block; border-radius: 9px; margin: 0 auto 16px; }
 .quote-mark { display: block; height: 30px; font-family: var(--font-serif); font-size: 58px; line-height: 1; color: var(--color-primary); }
 .quote-mark-close { text-align: right; margin-top: 8px; }
 .wish-message { font-size: clamp(19px, 1.25vw, 26px); line-height: 1.85; font-weight: 300; white-space: pre-wrap; text-align: center; }
