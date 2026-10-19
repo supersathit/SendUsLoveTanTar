@@ -86,11 +86,11 @@ export function DisplayPage() {
   return <MotionConfig reducedMotion="user"><main className={`display-page ${activeMouse ? '' : 'mouse-idle'}`}>
     <FloatingHearts />
     <FloralCorner className="display-floral-left" /><FloralCorner className="display-floral-right" />
-    <header className="display-header"><WeddingLogo /><div><p className="eyebrow">คำอวยพรและความทรงจำในวันของเรา</p><h1 className="couple-title">{wedding.title}</h1><Divider /><p className="wedding-date">{dateLabel}</p></div><span className="wish-count">คำอวยพรทั้งหมด <b>{data.total.toLocaleString('th-TH')}</b> ข้อความ</span></header>
+    <header className="display-header"><WeddingLogo /><div className="display-heading"><p className="eyebrow">คำอวยพรและความทรงจำในวันของเรา</p><h1 className="couple-title">{wedding.title}</h1><Divider /><p className="wedding-date">{dateLabel}</p></div><div className="display-summary"><span className="wish-count">คำอวยพรทั้งหมด <b>{data.total.toLocaleString('th-TH')}</b> ข้อความ</span><QRBadge /></div></header>
     <div ref={scroller} className="wall-scroll"><div className="wishes-wall"><AnimatePresence initial={false}>{displayedWishes.map(wish => <WishCard key={wish.id} wish={wish} fresh={wish.id === focusedId && data.freshIds.has(wish.id)} spotlight={wish.id === data.spotlightId} spotlightReady={wish.id === focusedId} now={now} />)}</AnimatePresence></div>
       {!data.wishes.length && <div className="wall-empty"><Icon name="heart" size={46} /><h2>{data.loading ? 'กำลังรวบรวมความรัก...' : 'คำอวยพรแรกของเรา อาจเป็นของคุณ'}</h2><p>{data.connection === 'unconfigured' ? 'กรุณาเชื่อมต่อระบบก่อนเปิดรับคำอวยพร' : 'สแกนคิวอาร์โค้ด แล้วฝากความรู้สึกดี ๆ ถึงบ่าวสาว'}</p></div>}
     </div>
-    <div className="display-bottom"><ConnectionDot status={data.connection} /><p role="status">{data.error || screenError || 'ทุกคำอวยพร จะอยู่ในความทรงจำของเราเสมอ'}</p></div><QRBadge />
+    <div className="display-bottom"><ConnectionDot status={data.connection} /><p role="status">{data.error || screenError || 'ทุกคำอวยพร จะอยู่ในความทรงจำของเราเสมอ'}</p></div>
     <button className={`fullscreen-button ${activeMouse ? '' : 'control-idle'}`} onClick={() => { void toggleFullscreen(); }} aria-label="เปิดหรือออกจากโหมดเต็มจอ" title="เต็มจอ"><Icon name="expand" /></button>
   </main></MotionConfig>;
 }
