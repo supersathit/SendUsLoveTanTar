@@ -7,6 +7,13 @@ type FrameClock = {
   cancel: (id: number) => void;
 };
 
+/** เริ่มและจบด้วยความเร็วเป็นศูนย์ เพื่อไม่ให้การกลับด้านบนดูเหมือนวาบทันที */
+export function getReturnScrollTop(start: number, elapsed: number) {
+  const progress = Math.min(1, Math.max(0, elapsed / WISH_FOCUS_SCROLL_MS));
+  const eased = progress ** 3 * (progress * (progress * 6 - 15) + 10);
+  return start * (1 - eased);
+}
+
 /** เลื่อนทั้งกระดานและหน้าเว็บถึงด้านบนก่อนเริ่มขยาย และตรึงไว้จนจบการนำเสนอ */
 export function focusWishAtTop(
   targets: ScrollTarget[],
@@ -26,7 +33,7 @@ export function focusWishAtTop(
   const tick = (time: number) => {
     if (cancelled) return;
     const progress = reducedMotion ? 1 : Math.min(1, Math.max(0, (time - started) / WISH_FOCUS_SCROLL_MS));
-    targets.forEach((target, index) => { target.scrollTop = starts[index] * (1 - progress) ** 3; });
+    targets.forEach((target, index) => { target.scrollTop = reducedMotion ? 0 : getReturnScrollTop(starts[index], time - started); });
     if (progress === 1 && !ready) { ready = true; onReady(); }
     if (!cancelled) frame = clock.request(tick);
   };

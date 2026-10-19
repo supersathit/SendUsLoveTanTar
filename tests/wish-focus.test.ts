@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { focusWishAtTop } from '../src/lib/wishFocus';
+import { focusWishAtTop, getReturnScrollTop } from '../src/lib/wishFocus';
 import { WISH_FOCUS_SCROLL_MS, WISH_PRESENTATION_MS, WISH_SPOTLIGHT_TOTAL_MS } from '../src/lib/wishSpotlight';
 
 function frameClock() {
@@ -24,8 +24,8 @@ test('เลื่อนกลับจากท้ายกระดานแ�
     ready++;
   }, false, clock);
   clock.step(WISH_FOCUS_SCROLL_MS / 2);
-  assert.equal(wall.scrollTop, 750);
-  assert.equal(page.scrollTop, 15);
+  assert.equal(wall.scrollTop, 3000);
+  assert.equal(page.scrollTop, 60);
   assert.equal(ready, 0);
   clock.step(WISH_FOCUS_SCROLL_MS);
   assert.equal(ready, 1);
@@ -39,6 +39,21 @@ test('เลื่อนกลับจากท้ายกระดานแ�
   wall.scrollTop = 500;
   clock.step(2000);
   assert.equal(wall.scrollTop, 500);
+});
+
+test('การกลับด้านบนไหลต่อเนื่อง เริ่มและหยุดนุ่มนวล ไม่วาบจากท้ายกระดาน', () => {
+  const start = 6000;
+  let previous = start;
+  for (let elapsed = 0; elapsed <= WISH_FOCUS_SCROLL_MS; elapsed += 16) {
+    const top = getReturnScrollTop(start, elapsed);
+    assert.ok(top >= 0 && top <= previous);
+    previous = top;
+  }
+  assert.ok(start - getReturnScrollTop(start, 16) < 1);
+  assert.ok(getReturnScrollTop(start, WISH_FOCUS_SCROLL_MS - 16) < 1);
+  assert.equal(getReturnScrollTop(start, WISH_FOCUS_SCROLL_MS / 2), start / 2);
+  assert.equal(getReturnScrollTop(start, WISH_FOCUS_SCROLL_MS), 0);
+  assert.equal(getReturnScrollTop(start, WISH_FOCUS_SCROLL_MS + 100), 0);
 });
 
 test('ยกเลิกเมื่อเปลี่ยนการ์ดหรือออกจากหน้าจอ โดยไม่เริ่มขยายการ์ดเก่า', () => {

@@ -1,7 +1,7 @@
 import type { Wish } from './types';
 
 export const WISH_SPOTLIGHT_SCALE = 2;
-export const WISH_FOCUS_SCROLL_MS = 650;
+export const WISH_FOCUS_SCROLL_MS = 1200;
 export const WISH_SPOTLIGHT_ENTER_MS = 350;
 export const WISH_SPOTLIGHT_HOLD_MS = 3000;
 export const WISH_SPOTLIGHT_RETURN_MS = 650;

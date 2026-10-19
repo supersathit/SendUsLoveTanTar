@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, MotionConfig } from 'framer-motion';
+import { AnimatePresence, MotionConfig, useReducedMotion } from 'framer-motion';
 import { wedding } from '../config/wedding';
 import { useWishesRealtime } from '../hooks/useWishesRealtime';
 import { Divider, FloralCorner, WeddingLogo } from '../components/Decorations';
@@ -9,14 +9,16 @@ import { ConnectionDot } from '../components/ConnectionDot';
 import { Icon } from '../components/Icon';
 import { FloatingHearts } from '../components/FloatingHearts';
 import { useWeddingSettings } from '../hooks/useWeddingSettings';
-import { getSpotlightWishes } from '../lib/wishSpotlight';
+import { getSpotlightWishes, WISH_FOCUS_SCROLL_MS } from '../lib/wishSpotlight';
 import { useWishFocus } from '../hooks/useWishFocus';
+import { getReturnScrollTop } from '../lib/wishFocus';
 
 export function DisplayPage() {
   const data = useWishesRealtime('display');
   const { dateLabel } = useWeddingSettings();
   const scroller = useRef<HTMLDivElement>(null);
   const focusedId = useWishFocus(scroller, data.spotlightId);
+  const reducedMotion = useReducedMotion();
   const [activeMouse, setActiveMouse] = useState(true);
   const [now, setNow] = useState(Date.now());
   const [screenError, setScreenError] = useState('');
@@ -32,22 +34,33 @@ export function DisplayPage() {
     let previous = performance.now();
     let position = 0;
     let pauseUntil = previous + 4000;
+    let returning: { started: number; from: number } | null = null;
     const tick = (time: number) => {
       const elapsed = Math.min(time - previous, 100); previous = time;
       const element = scroller.current;
-      if (element && !activeMouse && !data.spotlightId && time > pauseUntil) {
+      if (element && !activeMouse && !data.spotlightId && time > pauseUntil && returning) {
+        const elapsedReturn = time - returning.started;
+        position = reducedMotion ? 0 : getReturnScrollTop(returning.from, elapsedReturn);
+        element.scrollTop = position;
+        if (reducedMotion || elapsedReturn >= WISH_FOCUS_SCROLL_MS) {
+          returning = null; position = 0; pauseUntil = time + 4000;
+        }
+      } else if (element && !activeMouse && !data.spotlightId && time > pauseUntil) {
         const max = element.scrollHeight - element.clientHeight;
         if (max > 0) {
           position = Math.max(position, element.scrollTop) + elapsed * 0.022;
           element.scrollTop = position;
-          if (position >= max) { element.scrollTop = 0; position = 0; pauseUntil = time + 4000; }
+          if (position >= max) {
+            position = max; element.scrollTop = max;
+            returning = { started: time, from: max };
+          }
         }
       } else if (element) position = element.scrollTop;
       animation = requestAnimationFrame(tick);
     };
     animation = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(animation);
-  }, [activeMouse, data.spotlightId]);
+  }, [activeMouse, data.spotlightId, reducedMotion]);
   useEffect(() => {
     let lock: WakeLockSentinel | null = null;
     let disposed = false;
