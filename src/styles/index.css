@@ -98,7 +98,8 @@ textarea { resize: vertical; min-height: 135px; line-height: 1.9; }
 .display-heading { min-width: 0; text-align: left; }
 .display-header > .qr-badge { justify-self: end; }
 .display-header .couple-title { font-size: clamp(42px, 3.5vw, 70px); }
-.display-header .wedding-logo { width: 100px; height: 90px; }
+.display-logo { position: relative; align-self: stretch; width: 190px; }
+.display-header .wedding-logo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .display-header .eyebrow { font-size: 12px; }
 .display-header .ornament-divider { margin: 0; justify-content: flex-start; }
 .display-header .wedding-date { font-size: 14px; }
@@ -234,7 +235,7 @@ td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-ali
 }
 @media (max-width: 1200px) {
   .display-header { gap: 16px; margin: 0 24px; }
-  .display-header .wedding-logo { width: 70px; height: 60px; }
+  .display-logo { width: 150px; }
   .display-header .couple-title { font-size: clamp(32px, 4vw, 43px); }
   .qr-badge { padding: 8px; gap: 12px; }
   .qr-badge-copy { max-width: 220px; }
@@ -242,6 +243,7 @@ td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-ali
   .qr-badge strong { font-size: 24px; }
 }
 @media (max-width: 1050px) {
+  .display-logo { width: 130px; }
   .wish-count { font-size: 10px; padding: 4px 8px; gap: 5px; }
   .wish-count b { font-size: 14px; }
   .wall-scroll { padding: 28px 24px; }
@@ -252,7 +254,7 @@ td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-ali
 @media (max-width: 760px) {
   .display-header { grid-template-columns: auto minmax(0, 1fr); gap: 10px; }
   .display-heading { grid-column: 2; grid-row: 1; }
-  .display-header .wedding-logo { grid-column: 1; grid-row: 1; }
+  .display-logo { grid-column: 1; grid-row: 1; }
   .display-header > .qr-badge { grid-column: 1 / -1; grid-row: 2; }
 }
 @media (max-width: 600px) {
@@ -278,7 +280,7 @@ td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-ali
   .form-note { font-size: 9px; }
   .write-footer p { font-size: 8px; }
   .display-header { gap: 12px; margin: 0 15px; padding: 12px 0; }
-  .display-header .wedding-logo { width: 55px; height: 50px; }
+  .display-logo { width: 100px; }
   .display-header .eyebrow { font-size: 9px; }
   .display-header .couple-title { font-size: clamp(26px, 7vw, 36px); }
   .display-header .wedding-date { font-size: 11px; }
