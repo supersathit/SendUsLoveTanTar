@@ -94,11 +94,12 @@ textarea { resize: vertical; min-height: 135px; line-height: 1.9; }
 .display-floral-left { width: 270px; top: -30px; left: 0; opacity: .28; }
 .display-floral-right { width: 320px; right: -60px; bottom: -100px; transform: rotate(180deg); opacity: .28; }
 .display-header, .display-bottom { background: color-mix(in srgb, var(--color-bg) 55%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-.display-header { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; position: relative; align-items: center; gap: 30px; padding: 14px 0; flex-shrink: 0; border-bottom: 1px solid var(--color-border); margin: 0 44px; }
+.display-header { --display-header-gap: 30px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; position: relative; align-items: center; gap: var(--display-header-gap); padding: 14px 0; flex-shrink: 0; border-bottom: 1px solid var(--color-border); margin: 0 44px; }
 .display-heading { min-width: 0; text-align: left; }
 .display-header > .qr-badge { justify-self: end; }
 .display-header .couple-title { font-size: clamp(42px, 3.5vw, 70px); }
 .display-logo { position: relative; align-self: stretch; width: 190px; }
+.display-logo::after { content: ''; position: absolute; top: 10%; bottom: 10%; right: calc(var(--display-header-gap) / -2); width: 1px; background: color-mix(in srgb, var(--color-primary) 55%, transparent); pointer-events: none; }
 .display-header .wedding-logo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .display-header .eyebrow { font-size: 12px; }
 .display-header .ornament-divider { margin: 0; justify-content: flex-start; }
@@ -234,7 +235,7 @@ td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-ali
   .stats-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 1200px) {
-  .display-header { gap: 16px; margin: 0 24px; }
+  .display-header { --display-header-gap: 16px; margin: 0 24px; }
   .display-logo { width: 150px; }
   .display-header .couple-title { font-size: clamp(32px, 4vw, 43px); }
   .qr-badge { padding: 8px; gap: 12px; }
@@ -252,7 +253,7 @@ td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-ali
   .admin-account > span { display: none; }
 }
 @media (max-width: 760px) {
-  .display-header { grid-template-columns: auto minmax(0, 1fr); gap: 10px; }
+  .display-header { --display-header-gap: 10px; grid-template-columns: auto minmax(0, 1fr); }
   .display-heading { grid-column: 2; grid-row: 1; }
   .display-logo { grid-column: 1; grid-row: 1; }
   .display-header > .qr-badge { grid-column: 1 / -1; grid-row: 2; }
@@ -279,7 +280,7 @@ td { padding: 19px 23px; border-top: 1px solid var(--color-border); vertical-ali
   .optional { font-size: 10px; }
   .form-note { font-size: 9px; }
   .write-footer p { font-size: 8px; }
-  .display-header { gap: 12px; margin: 0 15px; padding: 12px 0; }
+  .display-header { --display-header-gap: 12px; margin: 0 15px; padding: 12px 0; }
   .display-logo { width: 100px; }
   .display-header .eyebrow { font-size: 9px; }
   .display-header .couple-title { font-size: clamp(26px, 7vw, 36px); }
